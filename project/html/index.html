@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dice Game</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/script.js"></script>
+
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Dice Game</h1>
+        </header>
+        <h2>Current Rolled Dice Values:</h2>
+        <div class="dice-container">
+            <div class="player-dice">
+                <p>Player Dice: <span id="playerDice"></span></p>
+                <img id="playerDiceImage1" src="../images/dice-face-1.png" alt="">
+                <img id="playerDiceImage2" src="../images/dice-face-2.png" alt="">
+            </div>
+            <div class="computer-dice">
+                <p>Computer Dice: <span id="computerDice"></span></p>
+                <img id="computerDiceImage1" src="../images/dice-face-1.png" alt="">
+                <img id="computerDiceImage2" src="../images/dice-face-2.png" alt="">
+            </div>
+        </div>
+        <div class="thisRoundScore">
+            <h2>This Round Scores:</h2>
+            <p>Player Score: <span id="playerRoundScore"></span></p>
+            <p>Computer Score: <span id="computerRoundScore"></span></p>
+        
+        </div>
+        <div class="score-container">
+            <h2>Total Score:</h2>
+            <div class="player-score">
+                <h3>Player Score: </h3>
+                <p id="playerScore">0</p>
+            </div>
+            <div class="computer-score">
+                <h3>Computer Score: </h3>
+                <span id="computerScore">0</span>
+            </div>
+        </div>
+        <div class="winner-display">
+            <h2 id="displayWinner"></h2>
+        </div>
+        <button id="rollButton" onclick="rollDice()">Roll Dice</button>
+        <button id="resetButton" onclick="resetGame()">Reset Game</button>
+    </div>
+</body>
+</html>
