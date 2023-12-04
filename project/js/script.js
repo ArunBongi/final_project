@@ -1,9 +1,12 @@
-let playerScore = 0;
-let computerScore = 0;
-let playerRolls = 0;
-let computerRolls = 0;
+let game = {
+    playerScore: 0,
+    computerScore: 0,
+    playerRolls: 0,
+    computerRolls: 0
+};
+
 function rollDice() {
-    if (playerRolls < 3 && computerRolls < 3) {
+    if (game.playerRolls < 3 && game.computerRolls < 3) {
         const playerDice1 = rollDie();
         const playerDice2 = rollDie();
         const computerDice1 = rollDie();
@@ -14,26 +17,26 @@ function rollDice() {
         
         updateDisplay(playerDice1, playerDice2, playerRoundScore, computerDice1, computerDice2, computerRoundScore);
 
-        playerScore += playerRoundScore;
-        computerScore += computerRoundScore;
+        game.playerScore += playerRoundScore;
+        game.computerScore += computerRoundScore;
 
-        playerRolls++;
-        computerRolls++;
+        game.playerRolls++;
+        game.computerRolls++;
 
-        if (playerRolls === 3 && computerRolls === 3) {
+        if (game.playerRolls === 3 && game.computerRolls === 3) {
             displayWinner();
             document.getElementById("rollButton").disabled = true; 
         }
     }
 }
 function resetGame() {
-    playerScore = 0;
-    computerScore = 0;
-    playerRolls = 0;
-    computerRolls = 0;
+    game.playerScore = 0;
+    game.computerScore = 0;
+    game.playerRolls = 0;
+    game.computerRolls = 0;
 
-    document.getElementById("playerScore").textContent = playerScore;
-    document.getElementById("computerScore").textContent = computerScore;
+    document.getElementById("playerScore").textContent = game.playerScore;
+    document.getElementById("computerScore").textContent = game.computerScore;
     document.getElementById("playerRoundScore").textContent = "";
     document.getElementById("computerRoundScore").textContent = "";
     document.getElementById("playerDice").textContent = "";
@@ -43,8 +46,6 @@ function resetGame() {
     document.getElementById("playerDiceImage2").setAttribute('src', '../images/dice-face-2.png');
     document.getElementById("computerDiceImage1").setAttribute('src', '../images/dice-face-1.png');
     document.getElementById("computerDiceImage2").setAttribute('src', '../images/dice-face-2.png');
-
-    
 
     document.getElementById("rollButton").disabled = false; 
 }
@@ -64,6 +65,12 @@ function calculateScore(die1, die2) {
         return die1 + die2;
     }
 }
+function updateDisplayWithAnimation(elementId, newValue) {
+    $(`#${elementId}`).fadeOut(300, function() {
+        $(this).text(newValue).fadeIn(300);
+    });
+}
+
 
 function updateDisplay(playerDie1, playerDie2, playerRoundScore, computerDie1, computerDie2, computerRoundScore) {    
     
@@ -77,16 +84,16 @@ function updateDisplay(playerDie1, playerDie2, playerRoundScore, computerDie1, c
     document.getElementById("playerDiceImage2").setAttribute('src', playerDiceImage2);
     document.getElementById("computerDiceImage1").setAttribute('src', computerDiceImage1);
     document.getElementById("computerDiceImage2").setAttribute('src', computerDiceImage2);
-
     
     document.getElementById("playerDice").textContent = `${playerDie1}, ${playerDie2}`;
     document.getElementById("computerDice").textContent = `${computerDie1}, ${computerDie2}`;
-    document.getElementById("playerRoundScore").textContent = `${playerRoundScore}`;
-    document.getElementById("computerRoundScore").textContent = `${computerRoundScore}`;
-    document.getElementById("playerScore").textContent = playerScore + playerRoundScore;
-    document.getElementById("computerScore").textContent = computerScore + computerRoundScore;
-}
 
+    updateDisplayWithAnimation("playerRoundScore", `${playerRoundScore}`);
+    updateDisplayWithAnimation("computerRoundScore", `${computerRoundScore}`);
+    updateDisplayWithAnimation("playerScore", `${game.playerScore + playerRoundScore}`);
+    updateDisplayWithAnimation("computerScore", `${game.computerScore + computerRoundScore}`);
+
+}
 
 function displayWinner() {
     let winner;
